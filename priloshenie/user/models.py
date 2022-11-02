@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from django.db import connection
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
@@ -35,6 +35,12 @@ class user(AbstractBaseUser, PermissionsMixin):
         'Email',
         max_length=255,
         unique=True,
+        null=False,
+        blank=False
+    )
+    phone = models.CharField(
+        'Телефон',
+        max_length=40,
         null=False,
         blank=False
     )

@@ -8,5 +8,6 @@ urlpatterns = [
     re_path(r'^sign_in/$', views.login),
     re_path(r'reg/',views.register),
     re_path(r'logout/',views.logout),
+    re_path(r'reg_sing/',views.reg_sing),
 
 ]

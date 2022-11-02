@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+<p class="zag">Введите номер</p>
+        <br>
+        <br>
+        <form action="/user/reg_sing/" method="post">
+            {% csrf_token %}
+            <p><input   required="required" name="target" class="inp1" placeholder="phone"></p>
+            {% if info %}
+                <p class="error"> {{ info }} </p>
+            {% endif %}
+
+              <p><button type="submit" class="butt3">Вход</button></p>
+          </form>
+</body>
+</html>

@@ -6,6 +6,10 @@ from django.contrib import auth
 
 from .forms import UserCreateForm
 
+from .models import user as user_table
+
+from django.db import connection
+
 
 def logout(request):
     auth.logout(request)
@@ -49,3 +53,29 @@ def register(request):
             args['reg_error'] = 'Error.'
             args['form'] = newuser_form
     return render(request, 'registr.html', args)
+
+@csrf_protect
+def reg_sing(request):
+    arg = dict()
+    if request.POST:
+        target = request.POST.get('target', '')
+        try:
+            user = auth.authenticate(email=target, password='admin')
+            if user is None:
+                with connection.cursor() as cursor:
+                    cursor.execute(f"SELECT email from Users WHERE phone LIKE {target}")
+                    try:
+                        target = cursor.fetchone()[0]
+                    except:
+                        target = None
+            if target == None:
+                arg['info'] = 'Такого пользователя не существует'
+            else:
+                user = auth.authenticate(email=target, password='admin')
+                auth.login(request, user)
+                arg['info'] = "Успешно"
+        except:
+            arg['info'] = 'Такого пользователя не существует'
+
+
+    return render(request, 'reg_sing.html',arg)
