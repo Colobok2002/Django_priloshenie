@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <link type="image/x-icon" rel="shortcut icon" href="{% static 'img/ico1.ico' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Вход</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+    <link href="{% static 'login.css' %}" rel="stylesheet">
+    </head>
+  <body>
+  <div class="backend">
+  </div>
+  <div class="container cont_one">
+      <div class="back">
+        <p class="zag">Вход</p>
+        <br><br>
+          <form action="/user/sign_in/" method="post">
+            {% csrf_token %}
+            <p><input type="email" required="required" name="email" class="inp1" placeholder="Your email address"></p>
+            <p><input type="password" name="password" class="inp2" placeholder="Your password" required></p>
+              {% if login_error %}
+                <p class="error"> Такого пользователя не существует </p>
+            {% endif %}
+
+              <p><button type="submit" class="butt3">Вход</button></p>
+          </form>
+
+        <p><a href="/user/reg/"><button class="butt33">Регистрация</button></a></p>
+        <br><br>
+        <form action="/">
+          <p><button class="backhome"><i class="fa fa-arrow-left"></i>На главную</button></p>
+        </form>
+      </div>
+    <br>
+  </div>
+
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{%  static 'js/bootstrap.js'  %}"></script>
+  </body>
+</html>
