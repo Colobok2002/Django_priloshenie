@@ -2,14 +2,15 @@ from __future__ import unicode_literals
 from django.db import connection
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
-
+from priloshenie.settings import SECRET_KEY
 
 
 # Create your models here.
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, **fields):
+    def create_user(self, email, password=SECRET_KEY, **fields):
+
         if not email:
             raise ValueError('Email is required.')
 
@@ -89,6 +90,7 @@ class user(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname']
     objects = UserManager()
+
 
     class Meta:
         verbose_name = 'Пользователи'

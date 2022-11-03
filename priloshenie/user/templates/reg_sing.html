@@ -10,7 +10,12 @@
         <br>
         <form action="/user/reg_sing/" method="post">
             {% csrf_token %}
-            <p><input   required="required" name="target" class="inp1" placeholder="phone"></p>
+            {% if email %}
+            <p><input   required="required" name="target" class="inp1" placeholder="email" value={{ email_inf }}></p>
+            <p><input   required="required" name="pass" class="inp1" placeholder="password" ></p>
+            {% else %}
+            <p><input   required="required" name="target" class="inp1" placeholder="phon"></p>
+            {% endif %}
             {% if info %}
                 <p class="error"> {{ info }} </p>
             {% endif %}
